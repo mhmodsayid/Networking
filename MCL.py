@@ -19,7 +19,7 @@ def decompress(bitin, out):# the Adaptive Arithmatic coding algorethem
 		if symbol == 256:  # EOF symbol
 			break
 	#	out.write((str(symbol,)) if python3 else chr(symbol))
-		freqs.increment(symbol)
+	#	freqs.increment(symbol)
 
 
 def main():
