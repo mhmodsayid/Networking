@@ -32,29 +32,37 @@ def main():
         sum=np.sum(a[:,j])
         a[:,j]=a[:,j]/sum
     c=(a)
-    
-    for j in range(power-1):
-        c=c.dot(c)
-        
-    while done<3:
+    temp=np.zeros(shape=(i,i))
+    while not np.array_equal(c,temp):
+        temp=c
+        for j in range(power-1):
+            c=c.dot(c)
         #multiply
         c=np.power(c,inflate)
         for k in range(i):
             c[:,k]=c[:,k]/np.sum(c[:,k])
         c=np.round(c,4)
         done+=1
+        print(done)
+        
     #print(a, end=' ')
    
     for j in range(2893):
         print(j,np.count_nonzero(c[j+1,:]!=0))
 
-
-    for j in range(94):
-        np.place(clastering, c[j+1,:]!=0, j+1)
-        count=np.count_nonzero(c[j+1,:]!=0)
-        if count<2:
-            j-=1
-            k+=2
+    Cnumber=0
+    for j in range(2893):
+        if c[j,j]!=0:
+            count=np.count_nonzero(c[j,:]!=0)
+            if count>1:
+                np.place(clastering, c[j,:]!=0, Cnumber)
+                Cnumber+=1
+            else:
+                np.place(clastering, c[j,:]!=0,-1)
+        else:
+            clastering[j]=-2
+        
+        
     
             
      #   *Vertices 2894.
